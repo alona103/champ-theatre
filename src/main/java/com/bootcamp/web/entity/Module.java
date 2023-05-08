@@ -25,22 +25,19 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode
-@Table(name = "ROLES")
-public class Role implements Serializable{
-    private static final long serialVersionUID = -4330760658341102884L;
+@Table(name = "MODULES")
+public class Module implements Serializable{
+    private static final long serialVersionUID = 617222588677070861L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom_role_sequence")
-    @SequenceGenerator(sequenceName = "custom_role_sequence", name = "custom_role_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom_module_sequence")
+    @SequenceGenerator(sequenceName = "custom_module_sequence", name = "custom_module_sequence", allocationSize = 1)
     private Long id;
 
     @Column(columnDefinition = "VARCHAR(15)", nullable = false)
-    private String role;
+    private String module;
 
-    @OneToMany(mappedBy = "role")
-    private Set<EmployeeRole> employee = new HashSet<>();
-    
-    @OneToMany(mappedBy = "role")
-    private Set<RoleModule> module = new HashSet<>();
+    @OneToMany(mappedBy = "module")
+    private Set<RoleModule> role = new HashSet<>();
 
 }
