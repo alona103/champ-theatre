@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -26,6 +28,13 @@ import lombok.Setter;
 public class Reservation extends AbstractEntity {
     
     private static final long serialVersionUID = -644923194083178365L;
+    
+    public enum Status {
+        PENDING,
+        APPROVED,
+        CANCELLED,
+        REJECTED
+    }
    
     @Column( nullable = false)
     private Integer event_type;
@@ -37,8 +46,9 @@ public class Reservation extends AbstractEntity {
     @Column(columnDefinition = "DATE", nullable = false)
     private Date eventDate;
     
-    @Column( nullable = false)
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15, nullable = false)
+    private Status status;
     
     @ManyToOne(fetch = FetchType.EAGER, optional= false)
     private Theatre theatre;

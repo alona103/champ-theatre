@@ -2,6 +2,8 @@ package com.bootcamp.web.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -17,6 +19,12 @@ import lombok.Setter;
 @Setter
 @Table(name = "EMPLOYEE_ACCOUNTS")
 public class EmployeeAccount extends AbstractEntity{
+	
+	private enum Status {
+        ACTIVE,
+        INACTIVE,
+        TERMINATED
+    }
 
     
     private static final long serialVersionUID = -1574715895034102724L;
@@ -30,6 +38,10 @@ public class EmployeeAccount extends AbstractEntity{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15, nullable = false)
+    private Status status;
     
     
 }

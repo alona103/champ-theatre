@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,20 +25,23 @@ import lombok.Setter;
 
 public class Theatre extends AbstractEntity {
 
+	public enum Status {
+		AVAILABLE, OCCUPIED, MAINTENANCE
+	}
 
-    private static final long serialVersionUID = -127860149735454233L;
+	private static final long serialVersionUID = -127860149735454233L;
 
 	@Column(columnDefinition = "VARCHAR(75)", nullable = false)
-    private String name;
+	private String name;
 
-    @Column(nullable = false)
-    private Integer status;
-    
-    @Column(name = "capacity", columnDefinition = "SMALLINT", nullable = false)
-    private Integer capacity;
-    
-    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reservation> reservations = new ArrayList<>();
-   
-    
+	@Enumerated(EnumType.STRING)
+	@Column(length = 15, nullable = false)
+	private Status status;
+
+	@Column(name = "capacity", columnDefinition = "SMALLINT", nullable = false)
+	private Integer capacity;
+
+	@OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Reservation> reservations = new ArrayList<>();
+
 }
