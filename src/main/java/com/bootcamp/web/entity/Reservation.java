@@ -1,10 +1,10 @@
 package com.bootcamp.web.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -61,6 +61,6 @@ public class Reservation extends AbstractEntity {
     @JoinColumn(name = "reviewer_id")
     private Employee reviewer;
     
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Participant> participants = new ArrayList<>();
+    @OneToMany(mappedBy = "reservation")
+    private Set<Participant> participants = new HashSet<>();
 }

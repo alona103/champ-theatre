@@ -48,8 +48,8 @@ public class Employee implements Serializable{
     @Column(columnDefinition = "VARCHAR(50)", nullable = false, unique = true)
     private String email;
     
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Participant> participants = new ArrayList<>();
+    @OneToMany(mappedBy = "employee")
+    private Set<Participant> participants = new HashSet<>();
     
     @OneToMany(mappedBy = "booker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations1 = new ArrayList<>();
